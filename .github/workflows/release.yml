@@ -6,24 +6,20 @@ on:
 name: Create Release
 
 jobs:
-  build:
-    name: Create Release
+  releases-matrix:
+    name: Release Go Binary
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # build and publish in parallel: linux/386, linux/amd64, windows/386, windows/amd64, darwin/386, darwin/amd64
+        goos: [linux, windows, darwin]
+        goarch: ["386", amd64]
     steps:
-      - name: Checkout code
-        uses: actions/checkout@master
-
-      - name: Set up Go
-        uses: actions/setup-go@v1
+      - uses: actions/checkout@v2
+      - uses: wangyoucao577/go-release-action@master
         with:
-          go-version: 1.13.x
-
-      - name: Run GoReleaser
-        uses: goreleaser/goreleaser-action@v1
-        with:
-          version: latest
-          args: release --rm-dist
-          key: ${{ secrets.YOUR_PRIVATE_KEY }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        #run: go build main.go
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          goos: ${{ matrix.goos }}
+          goarch: ${{ matrix.goarch }}
+          goversion: "https://dl.google.com/go/go1.13.1.linux-amd64.tar.gz"
+          binary_name: "Test CI " ${{ github.ref }}
