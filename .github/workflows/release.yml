@@ -22,4 +22,4 @@ jobs:
           goos: ${{ matrix.goos }}
           goarch: ${{ matrix.goarch }}
           goversion: "https://dl.google.com/go/go1.13.1.linux-amd64.tar.gz"
-          binary_name: "Test CI " ${{ github.ref }}
+          binary_name: ${{ github.ref }}
