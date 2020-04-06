@@ -17,7 +17,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GOARCH: amd64
           GOOS: linux
-      - tag_name: trucmuche_linux
+        tag_name: trucmuche_linux
 
   release-darwin-amd64:
     name: release darwin/amd64
@@ -30,7 +30,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GOARCH: amd64
           GOOS: darwin
-      - tag_name: trucmuche_mac
+        tag_name: trucmuche_mac
 
   release-windows-amd64:
     name: release windows/amd64
@@ -43,4 +43,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GOARCH: amd64
           GOOS: windows
-      - tag_name: trucmuche_windobe
+        tag_name: trucmuche_windobe
