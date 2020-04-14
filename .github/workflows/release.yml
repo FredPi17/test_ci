@@ -1,9 +1,12 @@
-on: release
+on:
+  push:
+    tags:
+      - 'v*'
 
 name: Create Release
 
 jobs:
-  releases:
+  releases-linux:
     name: Release Go Binary
     runs-on: ubuntu-latest
     steps:
@@ -17,31 +20,31 @@ jobs:
           project_path: "."
           binary_name: "test-ci"
 
-#
-#  releases-windows:
-#    name: Release Go Binary for windows
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v2
-#      - uses: wangyoucao577/go-release-action@master
-#        with:
-#          github_token: ${{ secrets.GITHUB_TOKEN }}
-#          goos: windows
-#          goarch: amd64
-#          goversion: "1.14"
-#          project_path: "."
-#          binary_name: "test-ci"
-#
-#  releases-darwin:
-#    name: Release Go Binary for darwiin
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v2
-#      - uses: wangyoucao577/go-release-action@master
-#        with:
-#          github_token: ${{ secrets.GITHUB_TOKEN }}
-#          goos: darwin
-#          goarch: amd64
-#          goversion: "1.14"
-#          project_path: "."
-#          binary_name: "test-ci"
+
+  releases-windows:
+    name: Release Go Binary for windows
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: wangyoucao577/go-release-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          goos: windows
+          goarch: amd64
+          goversion: "1.14"
+          project_path: "."
+          binary_name: "test-ci"
+
+  releases-darwin:
+    name: Release Go Binary for darwiin
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: wangyoucao577/go-release-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          goos: darwin
+          goarch: amd64
+          goversion: "1.14"
+          project_path: "."
+          binary_name: "test-ci"
