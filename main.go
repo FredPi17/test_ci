@@ -1,4 +1,4 @@
-package greeting
+package test_ci
 
 import (
 	"fmt"
