@@ -17,4 +17,4 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Test
-        run: TF_ACC=1 go test -v influxdbv2/*
+        run: go test -v test_ci*
