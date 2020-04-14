@@ -11,7 +11,7 @@ jobs:
       - uses: wangyoucao577/go-release-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          goos: [linux]
+          goos: linux
           goarch: amd64
           goversion: "1.14"
           project_path: "."
