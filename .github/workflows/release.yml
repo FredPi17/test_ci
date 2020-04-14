@@ -13,7 +13,7 @@ jobs:
       matrix:
         # build and publish in parallel: linux/amd64, windows/amd64, darwin/amd64
         goos: [linux, windows, darwin]
-        goarch: ["386"]
+        goarch: [amd64]
     steps:
       - uses: actions/checkout@v2
       - uses: wangyoucao577/go-release-action@master
@@ -21,6 +21,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           goos: ${{ matrix.goos }}
           goarch: ${{ matrix.goarch }}
-          goversion: "https://dl.google.com/go/go1.14.2.linux-amd64.tar.gz"
+          goversion: "1.14"
           project_path: "./"
           binary_name: "test-ci"
