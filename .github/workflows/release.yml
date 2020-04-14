@@ -9,42 +9,18 @@ jobs:
   releases-linux:
     name: Release Go Binary
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: wangyoucao577/go-release-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          goos: linux
-          goarch: amd64
-          goversion: "1.14"
-          project_path: "."
-          binary_name: "test-ci"
-
-
-  releases-windows:
-    name: Release Go Binary for windows
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: wangyoucao577/go-release-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          goos: windows
-          goarch: amd64
-          goversion: "1.14"
-          project_path: "."
-          binary_name: "test-ci"
-
-  releases-darwin:
-    name: Release Go Binary for darwiin
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: wangyoucao577/go-release-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          goos: darwin
-          goarch: amd64
-          goversion: "1.14"
-          project_path: "."
-          binary_name: "test-ci"
+    strategy:
+      matrix:
+        # build and publish in parallel: linux/amd64, windows/amd64, darwin/amd64
+        goos: [linux, windows, darwin]
+        goarch: ["386"]
+      steps:
+        - uses: actions/checkout@v2
+        - uses: wangyoucao577/go-release-action@master
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            goos: ${{ matrix.goos }}
+            goarch: ${{ matrix.goarch }}
+            goversion: "https://dl.google.com/go/go1.14.2.linux-amd64.tar.gz"
+            project_path: "./"
+            binary_name: "test-ci"
