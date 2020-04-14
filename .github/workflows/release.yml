@@ -3,44 +3,45 @@ on: release
 name: Create Release
 
 jobs:
-  releases-linux:
-    name: Release Go Binary for linux
+  releases:
+    name: Release Go Binary
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: wangyoucao577/go-release-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          goos: linux
+          goos: [linux, windows, darwin]
           goarch: amd64
           goversion: "1.14"
           project_path: "."
           binary_name: "test-ci"
 
-  releases-windows:
-    name: Release Go Binary for windows
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: wangyoucao577/go-release-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          goos: windows
-          goarch: amd64
-          goversion: "1.14"
-          project_path: "."
-          binary_name: "test-ci"
-
-  releases-darwin:
-    name: Release Go Binary for darwiin
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: wangyoucao577/go-release-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          goos: darwin
-          goarch: amd64
-          goversion: "1.14"
-          project_path: "."
-          binary_name: "test-ci"
+#
+#  releases-windows:
+#    name: Release Go Binary for windows
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#      - uses: wangyoucao577/go-release-action@master
+#        with:
+#          github_token: ${{ secrets.GITHUB_TOKEN }}
+#          goos: windows
+#          goarch: amd64
+#          goversion: "1.14"
+#          project_path: "."
+#          binary_name: "test-ci"
+#
+#  releases-darwin:
+#    name: Release Go Binary for darwiin
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#      - uses: wangyoucao577/go-release-action@master
+#        with:
+#          github_token: ${{ secrets.GITHUB_TOKEN }}
+#          goos: darwin
+#          goarch: amd64
+#          goversion: "1.14"
+#          project_path: "."
+#          binary_name: "test-ci"
