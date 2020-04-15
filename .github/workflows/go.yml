@@ -24,5 +24,9 @@ jobs:
           registry_password: ${{ secrets.GITHUB_BOT_TOKEN }}
           registry_endpoint: https://docker.pkg.github.com/v2/
 
+      - name: Run influxdb image
+        uses: azohra/shell-linter@v0.3.0
+        run: 'docker run --name influxdb quay.io/influxdb/influxdb:2.0.0-beta'
+
       - name: Test
         run: go test -v ./greeting/*.go
