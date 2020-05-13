@@ -19,8 +19,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Set APP_VERSION env
-        id: get_version
         run: echo ::set-env name=APP_VERSION::$(echo ${GITHUB_REF} | rev | cut -d'/' -f 1 | rev )
+      - name: Set RELEASE_VERSION
+        id: get_version
+        run: echo ::set-output name=RELEASE_VERSION::${GITHUB_REF/refs\/tags\//}
       - name: Set BUILD_TIME env
         run: echo ::set-env name=BUILD_TIME::$(date)
       - name: Environment Printer
@@ -33,4 +35,4 @@ jobs:
           goarch: ${{ matrix.goarch }}
           goversion: "1.14"
           project_path: "./"
-          binary_name: "test-ci_${{ steps.get_version.environment.APP_VERSION }}"
+          binary_name: "test-ci_${{ steps.get_version.outputs.RELEASE_VERSION }}"
