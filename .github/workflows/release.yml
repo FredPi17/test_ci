@@ -33,4 +33,4 @@ jobs:
           goarch: ${{ matrix.goarch }}
           goversion: "1.14"
           project_path: "./"
-          binary_name: "test-ci_"${{ steps.get_version.environment.APP_VERSION }}
+          binary_name: "test-ci_${{ steps.get_version.environment.APP_VERSION }}"
